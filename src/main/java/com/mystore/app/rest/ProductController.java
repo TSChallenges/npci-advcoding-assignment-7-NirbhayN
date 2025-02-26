@@ -60,15 +60,37 @@ public class ProductController {
     }
 
     // TODO: API to search products by name
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> getProductsByName(@RequestParam("name") String name){
+        List<Product> products=productService.getProductsByName(name);
+        return new ResponseEntity<>(products,HttpStatus.OK);
 
+    }
 
     // TODO: API to filter products by category
+    @GetMapping("/filter/category")
+    public ResponseEntity<List<Product>> getProductsByCategory(@RequestParam("category") String category){
+        List<Product> products=productService.getProductsByCategory(category);
+//        System.out.println(products);
+        return new ResponseEntity<>(products,HttpStatus.OK);
 
+    }
 
     // TODO: API to filter products by price range
 
+    @GetMapping("/filter/price")
+    public ResponseEntity<List<Product>> getProductsByPrice(@RequestParam("minPrice") Integer minPrice,@RequestParam("maxPrice") Integer maxprice){
+        List<Product> products=productService.filterByPriceRange(minPrice,maxprice);
+//        System.out.println(products);
+        return new ResponseEntity<>(products,HttpStatus.OK);
 
+    }
     // TODO: API to filter products by stock quantity range
+    @GetMapping("/filter/stock")
+    public ResponseEntity<List<Product>> getProductsByStockQty(@RequestParam("minStock") Integer minStock,@RequestParam("maxStock") Integer maxStock){
+        List<Product> products=productService.filterByStockRange(minStock,maxStock);
+        return new ResponseEntity<>(products,HttpStatus.OK);
 
+    }
 
 }
